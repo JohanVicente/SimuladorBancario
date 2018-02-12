@@ -40,6 +40,8 @@ function createUser (req, res){
 }
 
 function findByEmail(email){
+  res.status(200).send(req.body);
+
 
 }
 
