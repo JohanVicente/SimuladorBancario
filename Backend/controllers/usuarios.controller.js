@@ -30,13 +30,12 @@ function createUser(req, res) {
             }
         }
     });
-}
 
-function findByEmail(email) {
-    res.status(200).send(req.body);
-}
+    function findByEmail(email) {
+        res.status(200).send(req.body);
+    }
 
-module.exports = {
-    getUsuarios,
-    createUser
-}
+    module.exports = {
+        getUsuarios,
+        createUser
+    }

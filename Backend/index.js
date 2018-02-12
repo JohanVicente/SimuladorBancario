@@ -3,6 +3,7 @@ var app = express();
 const bodyParser = require('body-parser')
 var mysql = require('mysql');
 var usuariosControlller = require('./controllers/usuarios.controller')
+var cuentasControlller = require('./controllers/cuentas.controller')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -29,6 +30,8 @@ connection.connect(function(err) {
 
 app.get('/usuarios', usuariosControlller.getUsuarios);
 app.post('/usuarios', usuariosControlller.createUser);
+app.get('/cuentas', cuentasControlller.getCuentas);
+app.post('/cuentas', cuentasControlller.createCuenta);
 
 app.get('/', function(req, res) {
     res.send('Hello World!');
