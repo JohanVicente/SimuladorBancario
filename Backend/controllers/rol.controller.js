@@ -7,20 +7,21 @@ var connection = mysql.createConnection({
     user: 'root',
     password: 'angel',
     database: 'simuladorBancario'
+
 });
 
-function getUsuarios(req, res) {
-    connection.query('SELECT * FROM Usuarios', (error, results, fields) => {
+function getRol(req, res) {
+    connection.query('SELECT * FROM roles', (error, results, fields) => {
         if (error) throw error;
         res.status(200).send(results);
     });
 }
 
-function createUser(req, res) {
+function createRol(req, res) {
     res.status(200).send(req.body);
 }
 
 module.exports = {
-    getUsuarios,
-    createUser
+    getRol,
+    createRol
 }
