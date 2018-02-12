@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 var mysql = require('mysql');
 var usuariosControlller = require('./controllers/usuarios.controller')
 var rolControlller = require('./controllers/rol.controller')
+var cuentasControlller = require('./controllers/cuentas.controller')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -32,6 +33,8 @@ app.get('/usuarios', usuariosControlller.getUsuarios);
 app.post('/usuarios', usuariosControlller.createUser);
 app.get('/roles', rolControlller.getRol);
 app.post('/roles', rolControlller.createRol)
+app.get('/cuentas', cuentasControlller.getCuentas);
+app.post('/cuentas', cuentasControlller.createCuenta);
 
 app.get('/', function(req, res) {
     res.send('Hello World!');
