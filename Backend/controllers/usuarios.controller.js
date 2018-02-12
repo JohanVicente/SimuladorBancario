@@ -18,7 +18,7 @@ function getUsuarios (req, res) {
 
 function createUser (req, res){
   res.status(200).send(req.body);
-  let usuario =
+
 }
 
 module.exports = {
