@@ -10,15 +10,37 @@ var connection = mysql.createConnection({
 });
 
 function getUsuarios (req, res) {
-  connection.query('SELECT * FROM Usuarios',  (error, results, fields) => {
+  connection.query('SELECT * FROM Usuarios', (error, results, fields) => {
   if (error) throw error;
   res.status(200).send(results);
   });
 }
 
 function createUser (req, res){
-  res.status(200).send(req.body);
-  let usuario =
+  let usuario = req.body;
+
+  connection.query("SELECT * FROM Usuarios WHERE email = ?", [req.body.email], (error, results, fields) => {
+  if (error) {throw error;}
+  else{
+    if(results.length > 0){
+      res.status(400).send({message: 'Email'});
+    }else{
+      connection.query("INSERT INTO Usuarios SET ?", req.body, (error, results, fields) => {
+      if (error) throw error;
+      res.status(200).send({message: 'Usuario creado correctamente'});
+      });
+    }
+  }
+
+  });
+
+
+
+
+}
+
+function findByEmail(email){
+
 }
 
 module.exports = {
