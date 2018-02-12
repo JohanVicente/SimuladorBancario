@@ -1,0 +1,13 @@
+CREATE FUNCTION consultarSaldoProducto(idUsuario INT, tipoProducto VARCHAR(10)) RETURNS DOUBLE
+BEGIN
+    DECLARE SaldoProducto DOUBLE;
+    SELECT saldo into SaldoProducto FROM productos WHERE id = (SELECT id FROM productos WHERE cuenta = (SELECT id FROM Cuentas WHERE usuario = idUsuario))
+    AND tiposProductos = tipoProducto;
+    RETURN SaldoProducto;
+END$$
+
+CREATE PROCEDURE consultarMovimientosMensuales(idUsuario INT, fechaInicio VARCHAR(15), fechaFin VARCHAR(15))
+BEGIN
+    SELECT * FROM Movimientos WHERE producto = (SELECT id FROM Productos WHERE cuenta = (SELECT id FROM Cuentas WHERE usuario = idUsuario)) AND
+    DATE(fecha) BETWEEN fechaInicio AND fechaFin;
+END$$
