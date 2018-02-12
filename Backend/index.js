@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 const bodyParser = require('body-parser')
 var mysql = require('mysql');
+var usuariosControlller = require('./controllers/usuarios.controller')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -24,13 +27,8 @@ connection.connect(function(err) {
 
 });
 
-app.get('/ciudades', function (req, res) {
-  connection.query('SELECT * FROM CIudades',  (error, results, fields) => {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
-  res.send(results);
-  });
-});
+app.get('/usuarios', usuariosControlller.getUsuarios);
+app.post('/usuarios', usuariosControlller.createUser);
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
